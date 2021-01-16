@@ -2783,7 +2783,7 @@ class MusicBot(discord.Client):
                     handler_kwargs[key] = arg_value
                     params.pop(key)
 
-            self.user_has_permissions(message, command, user_permissions)
+            await self.user_has_permissions(message, command, user_permissions)
 
             # Invalid usage, return docstring
             if params:
