@@ -19,17 +19,20 @@ RUN apt-get upgrade -y
 
 # Add project source
 WORKDIR /app
-COPY . ./
+
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN python3.7 -m pip install -U pip
 RUN python3.7 -m pip install -U -r requirements.txt
 
+COPY . ./
+
 # Create volume for mapping the config
-# VOLUME /app/config
+VOLUME /app/config
 
 ENV APP_ENV=docker
 
-RUN python3.7 dockerentry.py
+CMD python3.7 dockerentry.py
 
 ENTRYPOINT ["python3.7", "run.py"]
