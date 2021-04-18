@@ -2922,6 +2922,7 @@ class MusicBot(discord.Client):
                     player.resume()
             elif player.voice_client.channel == before.channel and player.voice_client.channel != after.channel:
                 if not any(is_active(m) for m in player.voice_client.channel.members):  # channel is empty
+                    await self.cmd_disconect(channel.guild)
                     if not auto_paused and player.is_playing:
                         log.info(autopause_msg.format(
                             state = "Pausing",
