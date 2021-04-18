@@ -322,14 +322,14 @@ class Config:
 
 
 class ConfigDefaults:
-    owner_id = None
+    owner_id = os.environ.get('BOT_OWNER_ID', None)
 
-    token = None
+    token = os.environ.get('BOT_TOKEN', None)
     dev_ids = set()
     bot_exception_ids = set()
 
-    spotify_clientid = None
-    spotify_clientsecret = None
+    spotify_clientid = os.environ.get('BOT_SPOTIFY_CLIENTID', None)
+    spotify_clientsecret = os.environ.get('BOT_SPOTIFY_CLIENTSECRET', None)
 
     command_prefix = '!'
     bound_channels = set()
@@ -343,15 +343,15 @@ class ConfigDefaults:
     default_volume = 0.15
     skips_required = 4
     skip_ratio_required = 0.5
-    save_videos = True
+    save_videos = False
     now_playing_mentions = False
-    auto_summon = True
-    auto_playlist = True
+    auto_summon = False
+    auto_playlist = False
     auto_playlist_random = True
     auto_pause = True
     delete_messages = True
     delete_invoking = False
-    persistent_queue = True
+    persistent_queue = False
     debug_level = 'INFO'
     status_message = None
     write_current_song = False
