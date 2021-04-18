@@ -1990,7 +1990,7 @@ class MusicBot(discord.Client):
         await self.safe_delete_message(hand, quiet=True)
         return Response(self.str.get('cmd-shuffle-reply', "Shuffled `{0}`'s queue.").format(player.voice_client.channel.guild), delete_after=15)
 
-    async def cmd_clear(self, player, author):
+    async def cmd_clear(self, player, author=None):
         """
         Usage:
             {command_prefix}clear
@@ -2922,7 +2922,9 @@ class MusicBot(discord.Client):
                     player.resume()
             elif player.voice_client.channel == before.channel and player.voice_client.channel != after.channel:
                 if not any(is_active(m) for m in player.voice_client.channel.members):  # channel is empty
-                    await self.cmd_disconect(channel.guild)
+                    player.skip()
+                    await self.cmd_clear(player)
+                    await self.cmd_disconnect(channel.guild)
                     if not auto_paused and player.is_playing:
                         log.info(autopause_msg.format(
                             state = "Pausing",
